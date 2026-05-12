@@ -8,9 +8,12 @@ class Solution {
             if(target == nums[mid]){
                 int count1 = 0;
                 int count2 = 0;
+                //for seeing if target number are there after mid or not 
                 for(int i = mid+1; i<nums.length; i++){
                     if(nums[i] == target) count1++;
                 }
+
+                //for seeing if target number are there before mid or not 
                 for(int j = mid-1; j>=0; j--){
                     if(nums[j] == target) count2++;
                 }
