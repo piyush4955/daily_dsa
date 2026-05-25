@@ -1,48 +1,45 @@
 class Solution {
     public int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
 
-        int extra = 0;
+        int sum = 0;
 
         // first window
         for (int i = 0; i < minutes; i++) {
             if (grumpy[i] == 1) {
-                extra += customers[i];
+                sum += customers[i];
             }
         }
 
-        int maxExtra = extra;
+        int max = sum;
+
         int start = 0;
+        int end = minutes - 1;
 
         // sliding window
         for (int i = minutes; i < customers.length; i++) {
 
             if (grumpy[i] == 1) {
-                extra += customers[i];
+                sum += customers[i];
             }
 
             if (grumpy[i - minutes] == 1) {
-                extra -= customers[i - minutes];
+                sum -= customers[i - minutes];
             }
 
-            if (extra > maxExtra) {
-                maxExtra = extra;
+            if (sum > max) {
+                max = sum;
                 start = i - minutes + 1;
+                end = i;
             }
         }
 
-        int end = start + minutes - 1;
-
         int ans = 0;
 
-        // final answer
         for (int i = 0; i < customers.length; i++) {
 
-            // already satisfied
             if (grumpy[i] == 0) {
                 ans += customers[i];
             }
-
-            // power window
             else if (i >= start && i <= end) {
                 ans += customers[i];
             }
