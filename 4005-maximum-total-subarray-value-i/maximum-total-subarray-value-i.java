@@ -8,6 +8,6 @@ class Solution {
             max = Math.max(num,max);
             min = Math.min(num,min);
         }
-        return (max-min)*k;
+        return (long)(max-min)*k;
     }
 }
