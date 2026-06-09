@@ -1,28 +1,20 @@
 class Solution {
     public String frequencySort(String s) {
-        int check[] = new int[128];
-        Integer cross[] = new Integer[128];
-        int n = s.length();
 
-        for(int i = 0; i < n; i++){
-            int idx = s.charAt(i);   // fixed
-            check[idx]++;
+        HashMap<Character,Integer> mp = new HashMap<>();
+        for(char ch : s.toCharArray()){
+            mp.put(ch,mp.getOrDefault(ch,0)+1);
         }
 
-        for(int i = 0; i < 128; i++){
-            cross[i] = i;
-        }
+        ArrayList<Map.Entry<Character, Integer>> list = new ArrayList<>(mp.entrySet());
+        Collections.sort(list, (a, b) -> Integer.compare(b.getValue(), a.getValue()));
 
-        Arrays.sort(cross, (a, b) -> check[b] - check[a]);
-
-        String ans = "";
-
-        for(int i = 0; i < 128; i++){
-            for(int j = 0; j < check[cross[i]]; j++){
-                ans += (char)(int)cross[i];   // fixed
+        StringBuilder ans = new StringBuilder();
+        for (Map.Entry<Character, Integer> entry : list) {
+            for (int i = 0; i < entry.getValue(); i++) {
+                ans.append(entry.getKey());
             }
         }
-
-        return ans;
+        return ans.toString();
     }
 }
