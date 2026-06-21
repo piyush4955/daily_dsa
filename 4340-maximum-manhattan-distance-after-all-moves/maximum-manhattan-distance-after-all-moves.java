@@ -2,7 +2,6 @@ class Solution {
     public int maxDistance(String moves) {
 
         int n = moves.length();
-        int sum = 0;
         int countU = 0;
         int countD = 0;
         int countL = 0;
@@ -16,9 +15,7 @@ class Solution {
             else if(moves.charAt(i)=='R') countR++;
             else countunder++;
         }
-        int n1 = Math.abs(countR-countL);
-        int n2 = Math.abs(countU-countD);
-        sum = n1+n2+countunder;
-        return sum;
+        
+        return Math.abs(countU-countD)+Math.abs(countR-countL)+countunder;
     }
 }
